@@ -1,9 +1,6 @@
 import {Component} from "angular2/core";
-
-interface IHero {
-    id: number;
-    name: string;
-}
+import {IHero} from "./iHero";
+import {HeroDetailComponent} from "./hero-detail.component";
 
 var HEROES: IHero[] = [
   { "id": 11, "name": "Mr. Nice" },
@@ -31,18 +28,8 @@ var HEROES: IHero[] = [
                  <span class="badge">{{hero.id}}</span> {{hero.name}}
             </li>
         </ul>
-        <div *ngIf="selectedHero">
-            <h2>Hero {{selectedHero.name}} details!</h2>
-            <div>
-                <label>ID:</label>{{selectedHero.id}}
-            </div>
-            <div>
-                <label>Name:</label>
-                <div>
-                    <input [(ngModel)]="selectedHero.name" placeholder="Name of hero">
-                </div>
-            </div>
-        </div>
+        
+        <my-hero-detail [hero]="selectedHero"></my-hero-detail>
     `,
     styles:[`
       .heroes {list-style-type: none; margin-left: 1em; padding: 0; width: 10em;}
@@ -59,7 +46,8 @@ var HEROES: IHero[] = [
         top: -1px;
       }
       .selected { background-color: #EEE; color: #369; }
-    `]
+    `],
+    directives: [HeroDetailComponent]
 })
 
 export class AppComponent {
